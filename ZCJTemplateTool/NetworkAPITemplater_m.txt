@@ -1,0 +1,40 @@
+//
+//  {{ ClassName }}.m
+//  ZCJNetworkCodeGenerateTool
+//
+//  Created by zcj on 2017/2/24.
+//  Copyright © 2017年 zcj. All rights reserved.
+//
+
+#import "{{ ClassName }}.h"
+
+@implementation {{ ClassName }} {
+{% for p in Param %}
+    {{ p.value }} *_{{ p.key }};
+{% /for %}
+}
+
+
+- (id)init{% for p in Param %}With{{ p.key | capitalized }}:({{ p.value }} *){{ p.key }} {% /for %}{
+    self = [super init];
+    if (self) {
+        {% for p in Param %}
+        _{{ p.key }} = {{ p.key }};
+		{% /for %}
+    }
+    return self;
+}
+
+- (NSString *)requestUrl {
+    return @"{{ Url }}";
+}
+
+- (YTKRequestMethod)requestMethod {
+    return {{ MethodType }};
+}
+
+- (id)requestArgument {
+
+    return @{ {% for p in Param %}@"{{ p.key }}": _{{ p.key }}{% if Param.@lastObject.key equalsString p.key %}{% else %}, {% /if %}{% /for %}};
+}
+@end

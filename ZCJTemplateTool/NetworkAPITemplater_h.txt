@@ -1,0 +1,16 @@
+//
+//  {{ ClassName }}.h
+//  ZCJNetworkCodeGenerateTool
+//
+//  Created by zcj on 2017/2/24.
+//  Copyright © 2017年 zcj. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <YTKNetwork/YTKRequest.h>
+
+@interface {{ ClassName }} : YTKRequest
+
+- (id)init{% for p in Param %}With{{ p.key | capitalized }}:({{ p.value }} *){{ p.key }} {% /for %};
+
+@end
